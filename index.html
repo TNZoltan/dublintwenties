@@ -1,1 +1,195 @@
-<h1> Hello World! </h1>
+<!DOCTYPE html>
+<script>
+  var debateOptions, roleplayOptions, questionOptions;
+
+  function initDebate() {
+    debateOptions = [
+      'debate1',
+      'debate2',
+      'debate3',
+      'debate4',
+      'debate5',
+      'debate6'
+    ]
+  }
+
+  function initRoleplay() {
+    roleplayOptions = [
+      'roleplay1',
+      'roleplay2',
+      'roleplay3',
+      'roleplay4',
+      'roleplay5',
+      'roleplay6'
+    ]
+  }
+
+  function initQuestion() {
+    questionOptions = [
+      'question1',
+      'question2',
+      'question3',
+      'question4',
+      'question5',
+      'question6'
+    ]
+  }
+
+  initDebate()
+  initRoleplay()
+  initQuestion()
+</script>
+<html>
+
+<head>
+  <title>Dublin Twenties</title>
+</head>
+
+<body>
+  <img src="logo.png" class="logo" />
+  <h2 class="menu-button">Choose a minigame</h2>
+  <button class="menu-button" onclick="chooseGame('question')">Question</button>
+  <button class="menu-button" onclick="chooseGame('debate')">Debate</button>
+  <button class="menu-button" onclick="chooseGame('roleplay')">Roleplay</button>
+
+  <div id="debate-game" class="hidden">
+    <h1>DEBATE</h1>
+    <div class="center"><div id="debate-output"></div></div>
+    <div><button class="generate" onclick="generate('debate')">Generate</button></div>
+    <button class="back-button" onclick="backToMenu()">Back</button>
+    <p>Rules:</p>
+    Click <b>Generate</b> until you find a topic you disagree on<br>
+    Enjoy discussing!
+  </div>
+  <div id="roleplay-game" class="hidden">
+    <h1>ROLEPLAY</h1>
+    <div class="center"><div id="roleplay-output"></div></div>
+    <div><button class="generate" onclick="generate('roleplay')">Generate</button></div>
+    <button class="back-button" onclick="backToMenu()">Back</button>
+    <p>Rules:</p>
+    Decide if one or both of you are going to have a different identity<br>
+    Click <b>Generate</b> to see your new identity<br>
+    You can decide to share your identity or only reveal at the end<br>
+    Now you can ask each other creative questions and make up possible answers!
+  </div>
+  <div id="question-game" class="hidden">
+    <h1>QUESTION</h1>
+    <div class="center"><div id="question-output"></div></div>
+    <div><button class="generate" onclick="generate('question')">Generate</button></div>
+    <button class="back-button" onclick="backToMenu()">Back</button>
+    <p>Rules:</p>
+    Click <b>Generate</b> to get your new question<br>
+    Spend the rest of your conversation answering this question as deeply as possible<br>
+    But if you run out of things to say, go for a new question!
+  </div>
+</body>
+
+</html>
+
+
+<style>
+  body {
+    text-align: center;
+  }
+  .center {
+    display: flex;
+    justify-content: center; 
+  }
+  button {
+    background: #227028;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 14px;
+  }
+  p {
+    margin: 25px 0 5px 0;
+  }
+  .logo {
+    width: 100px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #debate-output,
+  #roleplay-output,
+  #question-output {
+    background: white;
+    border: 1px solid black;
+    width: 200px;
+    padding: 10px;
+    min-height: 30px;
+  }
+
+  .generate {
+    margin: 10px 0;
+  }
+</style>
+
+<script>
+  function hideElement(element) { element.classList.add('hidden') }
+  function showElement(element) { element.classList.remove('hidden') }
+
+  function chooseGame(game) {
+    document.querySelectorAll('.menu-button').forEach(hideElement)
+    switch (game) {
+      case 'debate':
+        showElement(document.querySelector('#debate-game'))
+        break;
+      case 'roleplay':
+        showElement(document.querySelector('#roleplay-game'))
+        break;
+      case 'question':
+        showElement(document.querySelector('#question-game'))
+        break;
+    }
+  }
+
+  chooseGame('question')
+
+  function backToMenu() {
+    hideElement(document.querySelector('#debate-game'))
+    hideElement(document.querySelector('#roleplay-game'))
+    hideElement(document.querySelector('#question-game'))
+    document.querySelectorAll('.menu-button').forEach(showElement)
+  }
+
+  function removeItem(arr, index) {
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+
+  function generate(game) {
+    var chosenGameOptions = [], optionPicked = null;
+    if (game === 'debate') chosenGameOptions = debateOptions
+    if (game === 'roleplay') chosenGameOptions = roleplayOptions
+    if (game === 'question') chosenGameOptions = questionOptions
+
+    var generateIndex = Math.floor(Math.random() * chosenGameOptions.length)
+
+    optionPicked = chosenGameOptions[generateIndex]
+
+    if (optionPicked === undefined) {
+      if (game === 'debate') initDebate()
+      if (game === 'roleplay') initRoleplay()
+      if (game === 'question') initQuestion()
+      generate(game)
+      return
+    }
+
+    removeItem(chosenGameOptions, generateIndex)
+
+
+    if (game === 'debate') document.querySelector('#debate-output').innerHTML = optionPicked = optionPicked
+    if (game === 'roleplay') document.querySelector('#roleplay-output').innerHTML = optionPicked = optionPicked
+    if (game === 'question') document.querySelector('#question-output').innerHTML = optionPicked = optionPicked
+
+  }
+
+</script>
