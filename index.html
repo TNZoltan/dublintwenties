@@ -4,34 +4,67 @@
 
   function initDebate() {
     debateOptions = [
-      'debate1',
-      'debate2',
-      'debate3',
-      'debate4',
-      'debate5',
-      'debate6'
+      'Who lies more: men or women?',
+      'Should men give up when ladies say no to their date requests?',
+      'Age is just a number when it comes to relationships.',
+      'Are there aliens in the universe?',
+      'Is better to reward or punish kids to teach them good manners?',
+      'Even if very little, there is a possibility that the earth is flat.',
+      'TikTok is good for kids.',
+      'Pizza vs Burger',
+      'Cats vs Dogs',
+      'We should all just ditch countries and become one big nation.',
+      'Do nice girls finish last?',
+      'Facebook is good for the world.',
+      'Do nursery rhymes have hidden meanings?',
+      'If Harry Potter magic was real, should it be legal?',
+      'Hotdog is a sandwich',
+      'Morning showers vs Evening showers'
     ]
   }
 
   function initRoleplay() {
     roleplayOptions = [
-      'roleplay1',
-      'roleplay2',
-      'roleplay3',
-      'roleplay4',
-      'roleplay5',
-      'roleplay6'
+      'Kanye West',
+      'Elon Musk',
+      'Julius Caesar',
+      'Albert Einstein',
+      'Donald Trump',
+      'Bill Gates',
+      'James Bond',
+      'Darth Vader',
+      'Godzilla',
+      'Tarzan',
+      'The Grinch',
+      'A mermaid',
+      'A cat who learned how to speak',
+      'A dog who learned how to speak',
+      'A teenager who thought this was an emo meetup',
+      'A lost eskimo who is looking for a way home',
+      'A time-traveller from 2050',
+      'A scientist who thinks he has the COVID vaccine but no one believes him',
+      'Jesus Christ'
     ]
   }
 
   function initQuestion() {
     questionOptions = [
-      'question1',
-      'question2',
-      'question3',
-      'question4',
-      'question5',
-      'question6'
+      'If you could hack into any one computer, whose computer would you choose?',
+      'What is the closest thing to real magic for you?',
+      'What made you smile this week?',
+      'What’s the most expensive thing you’ve broken and how?',
+      'What are you interested in that most people aren’t?',
+      'What was your most recent lie?',
+      'What was your most adventurous experience?',
+      'What’s the most amazing true story you’ve heard?',
+      'What did you Google last?',
+      'Who is your role-model?',
+      'What emotion do you experience the most?',
+      'What is the best piece of advice you ever received?',
+      'What would you do in your last 24 hours in Dublin?',
+      'Why did you come to this event?',
+      'How would your friends describe you?',
+      'What are you most proud of?'
     ]
   }
 
@@ -54,33 +87,51 @@
 
   <div id="debate-game" class="hidden">
     <h1>DEBATE</h1>
-    <div class="center"><div id="debate-output"></div></div>
+    Your new topic is:
+    <div class="center">
+      <div id="debate-output"></div>
+    </div>
     <div><button class="generate" onclick="generate('debate')">Generate</button></div>
     <button class="back-button" onclick="backToMenu()">Back</button>
-    <p>Rules:</p>
-    Click <b>Generate</b> until you find a topic you disagree on<br>
-    Enjoy discussing!
+    <div class="border-box">
+      <p>Rules:</p>
+      Click <b>Generate</b> until you find a topic you like or disagree on.<br>
+      Remember that the goal is to have fun and not to win the debate<br>
+      and don't feel pressure to only talk about the topic.<br>
+      Enjoy discussing!
+    </div>
   </div>
   <div id="roleplay-game" class="hidden">
     <h1>ROLEPLAY</h1>
-    <div class="center"><div id="roleplay-output"></div></div>
+    Your new identity is:
+    <div class="center">
+      <div id="roleplay-output"></div>
+    </div>
     <div><button class="generate" onclick="generate('roleplay')">Generate</button></div>
     <button class="back-button" onclick="backToMenu()">Back</button>
-    <p>Rules:</p>
-    Decide if one or both of you are going to have a different identity<br>
-    Click <b>Generate</b> to see your new identity<br>
-    You can decide to share your identity or only reveal at the end<br>
-    Now you can ask each other creative questions and make up possible answers!
+    <div class="border-box">
+      <p>Rules:</p>
+      Decide if one or both of you are going to have a different identity.<br>
+      Click <b>Generate</b> to see your new identity.<br>
+      You can decide to share your identity or only reveal at the end.<br>
+      Now you can ask each other creative questions and make up possible answers!<br>
+      Note: The identity can be real, fictional, historical, famous and not famous.
+    </div>
   </div>
   <div id="question-game" class="hidden">
     <h1>QUESTION</h1>
-    <div class="center"><div id="question-output"></div></div>
+    Your new question is:
+    <div class="center">
+      <div id="question-output"></div>
+    </div>
     <div><button class="generate" onclick="generate('question')">Generate</button></div>
     <button class="back-button" onclick="backToMenu()">Back</button>
-    <p>Rules:</p>
-    Click <b>Generate</b> to get your new question<br>
-    Spend the rest of your conversation answering this question as deeply as possible<br>
-    But if you run out of things to say, go for a new question!
+    <div class="border-box">
+      <p>Rules:</p>
+      Click <b>Generate</b> to get your new question.<br>
+      Take time to think and answer with great detail.<br>
+      If you run out of things to say, go for a new question!
+    </div>
   </div>
 </body>
 
@@ -91,10 +142,12 @@
   body {
     text-align: center;
   }
+
   .center {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
   }
+
   button {
     background: #227028;
     outline: none;
@@ -103,9 +156,22 @@
     color: white;
     padding: 8px 14px;
   }
+
   p {
-    margin: 25px 0 5px 0;
+    margin-bottom: 5px;
+    margin-top: 0;
   }
+
+  .border-box {
+    border: 1px solid black;
+    display: block;
+    max-width: 350px;
+    width: 98%;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+
   .logo {
     width: 100px;
   }
@@ -118,10 +184,13 @@
   #roleplay-output,
   #question-output {
     background: white;
-    border: 1px solid black;
-    width: 200px;
+    border: 3px solid black; 
+    border-radius: 3px;
+    font-style: italic;
+    max-width: 350px;
+    width: 98%;
     padding: 10px;
-    min-height: 30px;
+    min-height: 25px;
   }
 
   .generate {
@@ -147,8 +216,6 @@
         break;
     }
   }
-
-  chooseGame('question')
 
   function backToMenu() {
     hideElement(document.querySelector('#debate-game'))
