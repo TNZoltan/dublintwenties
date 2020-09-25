@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <script>
-  var debateOptions, roleplayOptions, questionOptions;
+  var debateOptions, questionOptions;
+
+
+  // function initRoleplay() {
+  //   roleplayOptions = [
+  //     'Kanye West',
+  //     'Elon Musk',
+  //     'Julius Caesar',
+  //     'Albert Einstein',
+  //     'Donald Trump',
+  //     'Bill Gates',
+  //     'James Bond',
+  //     'Darth Vader',
+  //     'Godzilla',
+  //     'Tarzan',
+  //     'The Grinch',
+  //     'A mermaid',
+  //     'A cat who learned how to speak',
+  //     'A dog who learned how to speak',
+  //     'A teenager who thought this was an emo meetup',
+  //     'A lost eskimo who is looking for a way home',
+  //     'A time-traveller from 2050',
+  //     'A scientist who thinks he has the COVID vaccine but no one believes him',
+  //     'Jesus Christ'
+  //   ]
+  // }
 
   function initDebate() {
     debateOptions = [
@@ -11,7 +36,6 @@
       'Is better to reward or punish kids to teach them good manners?',
       'Even if very little, there is a possibility that the earth is flat.',
       'TikTok is good for kids.',
-      'Pizza vs Burger',
       'Cats vs Dogs',
       'We should all just ditch countries and become one big nation.',
       'Do nice girls finish last?',
@@ -20,30 +44,6 @@
       'If Harry Potter magic was real, should it be legal?',
       'Hotdog is a sandwich',
       'Morning showers vs Evening showers'
-    ]
-  }
-
-  function initRoleplay() {
-    roleplayOptions = [
-      'Kanye West',
-      'Elon Musk',
-      'Julius Caesar',
-      'Albert Einstein',
-      'Donald Trump',
-      'Bill Gates',
-      'James Bond',
-      'Darth Vader',
-      'Godzilla',
-      'Tarzan',
-      'The Grinch',
-      'A mermaid',
-      'A cat who learned how to speak',
-      'A dog who learned how to speak',
-      'A teenager who thought this was an emo meetup',
-      'A lost eskimo who is looking for a way home',
-      'A time-traveller from 2050',
-      'A scientist who thinks he has the COVID vaccine but no one believes him',
-      'Jesus Christ'
     ]
   }
 
@@ -64,12 +64,15 @@
       'What would you do in your last 24 hours in Dublin?',
       'Why did you come to this event?',
       'How would your friends describe you?',
-      'What are you most proud of?'
+      'What are you most proud of?',
+      'What have you disliked before but then changed your mind?',
+      'What would be your first purchase if you won the lottery?',
+      'How do you feel right now?',
+      'What are things on your bucket list that you could do today?'
     ]
   }
 
   initDebate()
-  initRoleplay()
   initQuestion()
 </script>
 <html>
@@ -81,58 +84,29 @@
 
 <body>
   <img src="logo.png" class="logo" />
-  <h2 class="menu-button">Choose a minigame</h2>
-  <button class="menu-button" onclick="chooseGame('question')">Question</button>
-  <button class="menu-button" onclick="chooseGame('debate')">Debate</button>
-  <button class="menu-button" onclick="chooseGame('roleplay')">Roleplay</button>
-
-  <div id="debate-game" class="hidden">
-    <h1>DEBATE</h1>
-    <p>Your new topic is:</p>
-    <div class="center">
-      <div id="debate-output"></div>
-    </div>
-    <div><button class="generate" onclick="generate('debate')">Generate</button></div>
-    <button class="back-button" onclick="backToMenu()">Back</button>
+  <div id="start-screen" class="hidden">
+    <h2>Welcome to Speed Conversations</h2>
     <div class="border-box">
       <p>Rules:</p>
-      Click <b>Generate</b> until you find a topic you like or disagree on.<br>
-      Remember that the goal is to have fun and not to win the debate<br>
-      and don't feel pressure to only talk about the topic.<br>
-      Enjoy discussing!
+      <p>A <b>maximum of 3</b> uses of this app per partner, but ideally 1.</p>
+      <p>You <b>both</b> should answer the question.</p>
+      <p>Try your best to add as much as detail as possible.</p>
+      <p>Feel free to take some time to think, there's <b>no rush</b> here.</p>
+      <p>Enjoy :)</p>
+      <br>
+      Support our group by inviting friends and join our <a href="https://www.facebook.com/groups/510854133093741">Facebook group</a>!
     </div>
+    <button onclick="toGame()">We understand</button>
   </div>
-  <div id="roleplay-game" class="hidden">
-    <h1>ROLEPLAY</h1>
-    <p>Your new identity is:</p>
+  <div id="game" class="">
     <div class="center">
-      <div id="roleplay-output"></div>
+      <div id="output"></div>
     </div>
-    <div><button class="generate" onclick="generate('roleplay')">Generate</button></div>
-    <button class="back-button" onclick="backToMenu()">Back</button>
-    <div class="border-box">
-      <p>Rules:</p>
-      Decide if one or both of you are going to have a different identity.<br>
-      Click <b>Generate</b> to see your new identity.<br>
-      You can decide to share your identity or only reveal at the end.<br>
-      Now you can ask each other creative questions and make up possible answers!<br>
-      Note: The identity can be real, fictional, historical, famous and not famous.
+    <div class="button-container">
+      <button class="generate" onclick="generate('debate')">Give us a topic</button>
+      <button class="generate" onclick="generate('question')">Give us a question</button>
     </div>
-  </div>
-  <div id="question-game" class="hidden">
-    <h1>QUESTION</h1>
-    <p>Your new question is:</p>
-    <div class="center">
-      <div id="question-output"></div>
-    </div>
-    <div><button class="generate" onclick="generate('question')">Generate</button></div>
-    <button class="back-button" onclick="backToMenu()">Back</button>
-    <div class="border-box">
-      <p>Rules:</p>
-      Click <b>Generate</b> to get your new question.<br>
-      Take time to think and answer with great detail.<br>
-      If you run out of things to say, go for a new question!
-    </div>
+    <button class="back-button" onclick="backToMenu()">Show rules again</button>
   </div>
 </body>
 
@@ -168,8 +142,9 @@
     display: block;
     width: 350px;
     padding: 15px;
-    margin: 0 auto;
-    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+    margin: 15px auto;
   }
 
   .logo {
@@ -180,25 +155,32 @@
     display: none;
   }
 
-  #debate-output,
-  #roleplay-output,
-  #question-output {
+  #output {
     background: white;
-    border: 3px solid black; 
+    border: 3px solid black;
     border-radius: 3px;
     font-style: italic;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 17px;
-    width: 350px;
+    width: 320px;
     padding: 10px 30px;
+    margin: 20px 0;
     min-height: 50px;
   }
 
+  .button-container { 
+    display: flex;
+    flex-direction: row;
+    width: 320px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
   .generate {
-    padding: 8px 16px;
-    margin: 10px 0;
+    width: 50%;
+    margin: 10px;
   }
 </style>
 
@@ -206,26 +188,14 @@
   function hideElement(element) { element.classList.add('hidden') }
   function showElement(element) { element.classList.remove('hidden') }
 
-  function chooseGame(game) {
-    document.querySelectorAll('.menu-button').forEach(hideElement)
-    switch (game) {
-      case 'debate':
-        showElement(document.querySelector('#debate-game'))
-        break;
-      case 'roleplay':
-        showElement(document.querySelector('#roleplay-game'))
-        break;
-      case 'question':
-        showElement(document.querySelector('#question-game'))
-        break;
-    }
+  function toGame() {
+    document.querySelectorAll('#start-screen').forEach(hideElement)
+    showElement(document.querySelector('#game'))
   }
 
   function backToMenu() {
-    hideElement(document.querySelector('#debate-game'))
-    hideElement(document.querySelector('#roleplay-game'))
-    hideElement(document.querySelector('#question-game'))
-    document.querySelectorAll('.menu-button').forEach(showElement)
+    hideElement(document.querySelector('#game'))
+    document.querySelectorAll('#start-screen').forEach(showElement)
   }
 
   function removeItem(arr, index) {
@@ -239,7 +209,6 @@
   function generate(game) {
     var chosenGameOptions = [], optionPicked = null;
     if (game === 'debate') chosenGameOptions = debateOptions
-    if (game === 'roleplay') chosenGameOptions = roleplayOptions
     if (game === 'question') chosenGameOptions = questionOptions
 
     var generateIndex = Math.floor(Math.random() * chosenGameOptions.length)
@@ -248,7 +217,6 @@
 
     if (optionPicked === undefined) {
       if (game === 'debate') initDebate()
-      if (game === 'roleplay') initRoleplay()
       if (game === 'question') initQuestion()
       generate(game)
       return
@@ -257,9 +225,10 @@
     removeItem(chosenGameOptions, generateIndex)
 
 
-    if (game === 'debate') document.querySelector('#debate-output').innerHTML = optionPicked = optionPicked
-    if (game === 'roleplay') document.querySelector('#roleplay-output').innerHTML = optionPicked = optionPicked
-    if (game === 'question') document.querySelector('#question-output').innerHTML = optionPicked = optionPicked
+    if (game === 'debate') 
+      document.querySelector('#output').innerHTML = optionPicked
+    if (game === 'question') 
+      document.querySelector('#output').innerHTML = optionPicked
 
   }
 
